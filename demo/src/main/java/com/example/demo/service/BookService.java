@@ -1,26 +1,25 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.book.BookCreateDto;
-import com.example.demo.dto.book.BookDto;
-import com.example.demo.dto.book.BookUpdateDto;
+import com.example.demo.dto.book.request.BookRequestDto;
+import com.example.demo.entities.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public interface BookService {
-    BookDto save(BookCreateDto bookCreateDto);
+    Book save(BookRequestDto bookRequestDto);
 
-    BookDto update(Integer id, BookUpdateDto bookUpdateDto);
+    Book update(Integer id, BookRequestDto bookRequestDto);
 
-    BookDto getOne(Integer id);
+    Book getOne(Integer id);
 
     void delete(Integer id);
 
     void uploadImage(final Integer id, final MultipartFile file);
 
     // pagination : 2
-    Page<BookDto> findAll(int limit, int offset);
+    Page<Book> findAll(int limit, int offset);
 
 
 }

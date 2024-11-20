@@ -1,21 +1,20 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.user.UserCreateDto;
-import com.example.demo.dto.user.UserDto;
-import com.example.demo.dto.user.UserUpdateDto;
+import com.example.demo.dto.user.request.UserRequestDto;
+import com.example.demo.entities.User;
 import com.example.demo.models.PaginateParam;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    UserDto save(UserCreateDto userDto);
+    User save(UserRequestDto userRequestDto);
 
-    UserDto update(Integer id, UserUpdateDto userUpdateDto);
+    User update(Integer id, UserRequestDto userRequestDto);
 
-    UserDto getOne(Integer id);
+    User getOne(Integer id);
 
     void delete(Integer id);
 
-    Iterable<UserDto> getAllUsers(PaginateParam paginateParam);
+    Iterable<User> getAllUsers(PaginateParam paginateParam);
 }
 

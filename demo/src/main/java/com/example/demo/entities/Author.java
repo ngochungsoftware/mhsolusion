@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@Table(name = "authors",uniqueConstraints = @UniqueConstraint(columnNames = { "nationality"}))
+@Table(name = "authors", uniqueConstraints = @UniqueConstraint(columnNames = {"nationality"}))
 public class Author extends BaseEntity {
 
     @Column(nullable = false)

@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.user.UserCreateDto;
-import com.example.demo.dto.user.UserDto;
-import com.example.demo.dto.user.UserUpdateDto;
+
+import com.example.demo.dto.user.request.UserRequestDto;
+import com.example.demo.entities.User;
 import com.example.demo.infrastructure.common.ApiResponse;
 import com.example.demo.models.PaginateParam;
 import com.example.demo.service.UserService;
@@ -23,30 +23,30 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public Iterable<UserDto> getAllUsers(PaginateParam paginateParam) {
+    public Iterable<User> getAllUsers(PaginateParam paginateParam) {
         return userService.getAllUsers(paginateParam);
     }
 
     @PostMapping("/save")
-    public UserDto createUser(@RequestBody @Valid UserCreateDto userCreateDto) {
+    public User createUser(@RequestBody @Valid UserRequestDto userCreateDto) {
         return userService.save(userCreateDto);
     }
 
     @GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable Integer id) {
+    public User getUserById(@PathVariable Integer id) {
         return userService.getOne(id);
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<ApiResponse<UserDto>> updateUser(@PathVariable Integer id,
-                                                           @RequestBody @Valid UserUpdateDto userUpdateDto) {
-        UserDto userDto = userService.update(id, userUpdateDto);
-        ApiResponse<UserDto> response = new ApiResponse<>("User updated successfully", userDto, 201);
+    public ResponseEntity<ApiResponse<User>> updateUser(@PathVariable Integer id,
+                                                           @RequestBody @Valid UserRequestDto userUpdateDto) {
+        User User = userService.update(id, userUpdateDto);
+        ApiResponse<User> response = new ApiResponse<>("User updated successfully", User, 201);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ApiResponse<UserDto>> deleteUser(@PathVariable Integer id) {
+    public ResponseEntity<ApiResponse<User>> deleteUser(@PathVariable Integer id) {
         userService.delete(id);
         return ResponseEntity.ok(new ApiResponse<>("User deleted successfully", null, 204));
     }

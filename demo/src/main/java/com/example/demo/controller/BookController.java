@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.dto.book.BookCreateDto;
-import com.example.demo.dto.book.BookDto;
-import com.example.demo.dto.book.BookUpdateDto;
+import com.example.demo.dto.book.request.BookRequestDto;
+import com.example.demo.entities.Book;
 import com.example.demo.infrastructure.common.ApiResponse;
 import com.example.demo.service.BookService;
 import jakarta.validation.Valid;
@@ -33,34 +32,34 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<BookDto>> getAllBooks(
+    public ResponseEntity<Page<Book>> getAllBooks(
             @RequestParam(name = "limit", defaultValue = "5") int limit,
             @RequestParam(name = "offset", defaultValue = "0") int offset) {
-        Page<BookDto> books = bookService.findAll(limit, offset);
+        Page<Book> books = bookService.findAll(limit, offset);
         return ResponseEntity.ok(books);
     }
 
     @PostMapping("/save")
-    public ResponseEntity<BookDto> saveBook(@RequestBody @Valid BookCreateDto bookCreateDto) {
-        BookDto bookDto = bookService.save(bookCreateDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(bookDto);
+    public ResponseEntity<Book> saveBook(@RequestBody @Valid BookRequestDto bookCreateDto) {
+        Book Book = bookService.save(bookCreateDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(Book);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<BookDto> updateBook(@PathVariable Integer id,
-                                              @RequestBody @Valid BookUpdateDto bookUpdateDto) {
-        BookDto bookDto = bookService.update(id, bookUpdateDto);
-        return ResponseEntity.status(HttpStatus.OK).body(bookDto);
+    public ResponseEntity<Book> updateBook(@PathVariable Integer id,
+                                              @RequestBody @Valid BookRequestDto bookUpdateDto) {
+        Book Book = bookService.update(id, bookUpdateDto);
+        return ResponseEntity.status(HttpStatus.OK).body(Book);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ApiResponse<BookDto>> deleteBook(@PathVariable Integer id) {
+    public ResponseEntity<ApiResponse<Book>> deleteBook(@PathVariable Integer id) {
         bookService.delete(id);
         return ResponseEntity.ok(new ApiResponse<>("Book deleted successfully", null, 204));
     }
 
     @GetMapping("/{id}")
-    public BookDto getOneBook(@PathVariable Integer id) {
+    public Book getOneBook(@PathVariable Integer id) {
         return bookService.getOne(id);
     }
 

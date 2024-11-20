@@ -1,8 +1,7 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.user.UserCreateDto;
-import com.example.demo.dto.user.UserDto;
-import com.example.demo.dto.user.UserUpdateDto;
+
+import com.example.demo.dto.user.request.UserRequestDto;
 import com.example.demo.entities.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.models.PaginateParam;
@@ -22,22 +21,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDto save(UserCreateDto userCreateDto) {
-        User user = userMapper.toEntity(userCreateDto);
-        return userMapper.toDto(userRepository.save(user));
+    public User save(UserRequestDto userRequestDto) {
+        User user = userMapper.toEntity(userRequestDto);
+        return userRepository.save(user);
     }
 
     @Override
     @Transactional
-    public UserDto update(Integer id, UserUpdateDto userUpdateDto) {
+    public User update(Integer id, UserRequestDto userUpdateDto) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
-        return userMapper.toDto(userRepository.save(userMapper.partialUpdate(userUpdateDto, user)));
+        user.setName(userUpdateDto.getName());
+        user.setEmail(userUpdateDto.getEmail());
+        user.setPhone(userUpdateDto.getPhone());
+        return userRepository.save(user);
     }
 
     @Override
-    public UserDto getOne(Integer id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
-        return userMapper.toDto(user);
+    public User getOne(Integer id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
     @Override
@@ -46,8 +47,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Iterable<UserDto> getAllUsers(PaginateParam paginateParam) {
-        return userRepository.findAll(paginateParam.toPageRequest()).stream().map(userMapper::toDto).toList();
+    public Iterable<User> getAllUsers(PaginateParam paginateParam) {
+        return userRepository.findAll(paginateParam.toPageRequest()).stream().toList();
     }
 
 }

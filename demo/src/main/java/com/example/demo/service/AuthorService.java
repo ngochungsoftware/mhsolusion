@@ -1,21 +1,21 @@
 package com.example.demo.service;
 
 
-import com.example.demo.dto.author.AuthorCreateDto;
-import com.example.demo.dto.author.AuthorDto;
-import com.example.demo.dto.author.AuthorUpdateDto;
+
+import com.example.demo.dto.author.request.AuthorRequestDto;
+import com.example.demo.entities.Author;
 import org.springframework.data.domain.Page;
 
 public interface AuthorService {
 
-    AuthorDto save(AuthorCreateDto authorCreateDto);
+    Author save(AuthorRequestDto authorRequestDto);
 
-    AuthorDto update(Integer id, AuthorUpdateDto authorUpdateDto);
+    Author update(Integer id, AuthorRequestDto authorRequestDto);
 
-    AuthorDto getOne(Integer id);
+    Author getOne(Integer id);
 
     void delete(Integer id);
 
     // pagination : 2
-    Page<AuthorDto> findAll(int limit, int offset);
+    Page<Author> findAll(int limit, int offset);
 }

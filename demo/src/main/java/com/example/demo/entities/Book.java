@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,9 +21,13 @@ public class Book extends BaseEntity {
     @Column(nullable = false)
     private String title;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id", nullable = false)
-    private Author author;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    private Set<Author> authors;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id", nullable = false)
