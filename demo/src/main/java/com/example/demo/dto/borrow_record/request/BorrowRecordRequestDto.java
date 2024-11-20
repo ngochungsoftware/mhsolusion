@@ -16,8 +16,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class BorrowRecordRequestDto
 {
-    private Set<User> users;
-    private Set<Book> books;
+    private Set<Integer> users;
+    private Set<Integer> books;
     private LocalDate borrowDate;
     private LocalDate returnDate;
     private Status status;

@@ -37,7 +37,8 @@ public abstract class BookMapper {
     public Set<Author> mapAuthorIdsToAuthors(Set<Integer> authorIds) {
         Set<Author> authors = new HashSet<>();
         for (Integer authorId : authorIds) {
-            Author author = authorRepository.findById(authorId).orElseThrow(() -> new NotFoundException("Author not found with id: " + authorId));
+            Author author = authorRepository.findById(authorId).orElseThrow(
+                    () -> new NotFoundException("Author not found with id: " + authorId));
             authors.add(author);
         }
         return authors;

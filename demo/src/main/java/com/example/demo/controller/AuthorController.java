@@ -33,15 +33,15 @@ public class AuthorController {
 
     @PostMapping("/save")
     public ResponseEntity<Author> saveAuthor(@RequestBody @Valid AuthorRequestDto authorCreateDto) {
-        Author Author = authorService.save(authorCreateDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Author);
+        Author author = authorService.save(authorCreateDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(author);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Author> updateAuthor(@PathVariable Integer id,
                                               @RequestBody @Valid AuthorRequestDto authorUpdateDto) {
-        Author Author = authorService.update(id , authorUpdateDto);
-        return ResponseEntity.status(HttpStatus.OK).body(Author);
+        Author author = authorService.update(id , authorUpdateDto);
+        return ResponseEntity.status(HttpStatus.OK).body(author);
     }
 
     @DeleteMapping("/delete/{id}")
