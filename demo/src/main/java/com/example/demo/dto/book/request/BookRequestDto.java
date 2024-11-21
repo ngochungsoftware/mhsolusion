@@ -12,7 +12,7 @@ public class BookRequestDto {
     private String title;
     private Set<Integer> authorIds;
     private Integer genreId;
-    private Integer year;
+    private Integer publicationYear;
     private String imageUrl;
     private String cloudinaryImageId;
     private Integer quantity;

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.dto.borrow_record.request.BorrowRecordRequestDto;
+import com.example.demo.dto.borrow_record.request.BorrowRecordRequestDtoV2;
 import com.example.demo.entities.BorrowRecord;
 import com.example.demo.service.BorrowRecordService;
 import jakarta.validation.Valid;
@@ -20,8 +21,8 @@ public class BorrowRecordController {
     private final BorrowRecordService borrowRecordService;
 
     @PostMapping
-    public ResponseEntity<String> saveBorrowRecord(@RequestBody @Valid BorrowRecordRequestDto borrowRecordRequestDto) {
-        BorrowRecord borrowRecord = borrowRecordService.create(borrowRecordRequestDto);
+    public ResponseEntity<String> saveBorrowRecord(@RequestBody @Valid BorrowRecordRequestDtoV2 borrowRecordRequestDtoV2) {
+        BorrowRecord borrowRecord = borrowRecordService.createv2(borrowRecordRequestDtoV2);
         return ResponseEntity.status(HttpStatus.OK).body(borrowRecord.toString());
     }
 }
